@@ -1,6 +1,7 @@
 package com.example.springbatchexample.controller;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.batch.core.BatchStatus;
@@ -18,8 +19,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.springbatchexample.model.H2Report;
+//import com.example.springbatchexample.repository.H2ReportRepository;
+
 @RestController
-@RequestMapping("/load")
+@RequestMapping
 public class LoadController {
 	
 	@Autowired
@@ -28,7 +32,10 @@ public class LoadController {
 	@Autowired
 	Job job;
 	
-	@GetMapping
+//	@Autowired
+//	H2ReportRepository repository;
+	
+	@GetMapping("/load")
 	public BatchStatus load() throws JobExecutionAlreadyRunningException, JobRestartException, JobInstanceAlreadyCompleteException, JobParametersInvalidException {
 		
 		Map<String, JobParameter> maps = new HashMap<>();
@@ -45,5 +52,10 @@ public class LoadController {
 		
 		return jobExecution.getStatus();
 	}
+	
+//	@GetMapping("/report")
+//	public List<H2Report> report() {
+//		return repository.findAll();
+//	}
 
 }
